@@ -42,6 +42,8 @@ popd
 
 %find_lang %{name} --with-gnome
 
+%find_lang %{name} --with-gnome
+
 desktop-file-install \
   --dir=%{buildroot}%{_datadir}/applications/ \
   %{buildroot}%{_datadir}/applications/io.github.cboxdoerfer.FSearch.desktop
@@ -53,4 +55,5 @@ desktop-file-install \
 %{_datadir}/man/man1/fsearch.1.gz
 %{_datadir}/metainfo/io.github.cboxdoerfer.FSearch.metainfo.xml
 %{_datadir}/locale/*/*/fsearch.mo
+%{_datadir}/help/*/*/fsearch.mo
 
