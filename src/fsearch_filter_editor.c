@@ -101,7 +101,7 @@ fsearch_filter_editor_run(const char *title,
     editor->callback = callback;
     editor->data = data;
 
-    editor->builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/fsearch/ui/fsearch_filter_editor.ui");
+    editor->builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/FSearch/ui/fsearch_filter_editor.ui");
 
     editor->dialog = GTK_WIDGET(gtk_builder_get_object(editor->builder, "FsearchFilterEditorWindow"));
     gtk_window_set_transient_for(GTK_WINDOW(editor->dialog), parent_window);

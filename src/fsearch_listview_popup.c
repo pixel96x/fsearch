@@ -172,7 +172,7 @@ fill_open_with_menu(GtkBuilder *builder, FsearchDatabaseView *db_view) {
 
 gboolean
 listview_popup_menu(GtkWidget *widget, FsearchDatabaseView *db_view) {
-    g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/fsearch/ui/menus.ui");
+    g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/FSearch/ui/menus.ui");
 
     fill_open_with_menu(builder, db_view);
     add_file_properties_entry(builder);

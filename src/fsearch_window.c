@@ -731,7 +731,7 @@ static void
 fsearch_application_window_init_overlays(FsearchApplicationWindow *win) {
     g_assert(FSEARCH_IS_APPLICATION_WINDOW(win));
 
-    g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/fsearch/ui/"
+    g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/FSearch/ui/"
                                                                   "fsearch_overlay.ui");
 
     win->main_database_overlay_stack = GTK_WIDGET(gtk_builder_get_object(builder, "main_database_overlay_stack"));
@@ -1021,7 +1021,7 @@ fsearch_application_window_class_init(FsearchApplicationWindowClass *klass) {
     object_class->constructed = fsearch_application_window_constructed;
     object_class->finalize = fsearch_application_window_finalize;
 
-    gtk_widget_class_set_template_from_resource(widget_class, "/io/github/cboxdoerfer/fsearch/ui/fsearch_window.ui");
+    gtk_widget_class_set_template_from_resource(widget_class, "/io/github/cboxdoerfer/FSearch/ui/fsearch_window.ui");
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, app_menu);
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, filter_combobox);
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, filter_revealer);

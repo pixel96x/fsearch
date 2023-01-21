@@ -2116,7 +2116,7 @@ on_fsearch_list_view_header_button_clicked(GtkButton *button, gpointer user_data
 static gboolean
 on_fsearch_list_view_header_button_pressed(GtkWidget *widget, GdkEvent *event, gpointer user_data) {
     if (gdk_event_triggers_context_menu(event)) {
-        g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/fsearch/ui/menus.ui");
+        g_autoptr(GtkBuilder) builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/FSearch/ui/menus.ui");
         GMenuModel *menu_model = G_MENU_MODEL(gtk_builder_get_object(builder, "fsearch_listview_column_popup_menu"));
 
         FsearchListViewColumn *col = user_data;
