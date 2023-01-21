@@ -657,13 +657,6 @@ fsearch_application_startup(GApplication *app) {
 
     g_object_set(gtk_settings_get_default(), "gtk-application-prefer-dark-theme", fsearch->config->enable_dark_theme, NULL);
 
-    if (fsearch->config->show_menubar) {
-        g_autoptr(GtkBuilder) menu_builder = gtk_builder_new_from_resource("/io/github/cboxdoerfer/FSearch/ui/"
-                                                                           "menus.ui");
-        GMenuModel *menu_model = G_MENU_MODEL(gtk_builder_get_object(menu_builder, "fsearch_main_menu"));
-        gtk_application_set_menubar(GTK_APPLICATION(app), menu_model);
-    }
-
     if (!fsearch->config->show_menubar) {
         // When the menubar is shown, F10 is already set to open the first menu in the menubar.
         // So we only want to override the F10 action when the menu bar is hidden.

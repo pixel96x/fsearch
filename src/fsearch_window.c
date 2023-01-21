@@ -184,6 +184,7 @@ fsearch_window_apply_menubar_config(FsearchApplicationWindow *win) {
     if (config->show_menubar) {
         gtk_window_set_titlebar(GTK_WINDOW(win), NULL);
         gtk_window_set_title(GTK_WINDOW(win), g_get_application_name());
+        gtk_application_window_set_show_menubar(GTK_APPLICATION_WINDOW(win), TRUE);
 
         g_object_ref(G_OBJECT(win->search_box));
         gtk_box_remove(GTK_BOX(win->headerbar_box), win->search_box);
@@ -192,6 +193,7 @@ fsearch_window_apply_menubar_config(FsearchApplicationWindow *win) {
         g_object_unref(G_OBJECT(win->search_box));
     }
     else {
+        gtk_application_window_set_show_menubar(GTK_APPLICATION_WINDOW(win), FALSE);
         GtkStyleContext *list_style = gtk_widget_get_style_context(win->listview_scrolled_window);
         gtk_style_context_add_class(list_style, "results_frame_csd_mode");
     }
