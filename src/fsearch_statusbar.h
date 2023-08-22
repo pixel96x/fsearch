@@ -8,7 +8,7 @@ G_BEGIN_DECLS
 
 #define FSEARCH_STATUSBAR_TYPE (fsearch_statusbar_get_type())
 
-G_DECLARE_FINAL_TYPE(FsearchStatusbar, fsearch_statusbar, FSEARCH, STATUSBAR, GtkRevealer)
+G_DECLARE_FINAL_TYPE(FsearchStatusbar, fsearch_statusbar, FSEARCH, STATUSBAR, GtkBox)
 
 FsearchStatusbar *
 fsearch_statusbar_new(void);

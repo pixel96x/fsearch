@@ -63,6 +63,7 @@ struct _FsearchApplicationWindow {
     GtkWidget *main_result_overlay;
     GtkWidget *main_search_overlay_stack;
 
+    GtkWidget *statusbar_revealer;
     GtkWidget *statusbar;
 
     char *active_filter_name;
@@ -845,9 +846,6 @@ fsearch_application_window_init(FsearchApplicationWindow *self) {
 
     self->result_view = fsearch_result_view_new();
 
-    self->statusbar = GTK_WIDGET(fsearch_statusbar_new());
-    gtk_box_append(GTK_BOX(self->main_box), self->statusbar);
-
     fsearch_window_actions_init(self);
     fsearch_application_window_init_listview(self);
     fsearch_application_window_init_overlays(self);
@@ -1037,6 +1035,7 @@ fsearch_application_window_class_init(FsearchApplicationWindowClass *klass) {
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, search_box);
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, search_button_revealer);
     gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, search_entry);
+    gtk_widget_class_bind_template_child(widget_class, FsearchApplicationWindow, statusbar_revealer);
 
     gtk_widget_class_bind_template_callback(widget_class, on_filter_combobox_changed);
     gtk_widget_class_bind_template_callback(widget_class, on_fsearch_window_delete_event);
@@ -1056,7 +1055,7 @@ fsearch_application_window_apply_statusbar_revealer_config(FsearchApplicationWin
     else {
         gtk_style_context_remove_class(filter_style, "results_frame_last");
     }
-    gtk_revealer_set_reveal_child(GTK_REVEALER(win->statusbar), config->show_statusbar);
+    gtk_revealer_set_reveal_child(GTK_REVEALER(win->statusbar_revealer), config->show_statusbar);
 
     fsearch_statusbar_set_revealer_visibility(FSEARCH_STATUSBAR(win->statusbar),
                                               FSEARCH_STATUSBAR_REVEALER_MATCH_CASE,

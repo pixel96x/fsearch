@@ -6,7 +6,7 @@
 #include <glib/gi18n.h>
 
 struct _FsearchStatusbar {
-    GtkRevealer parent_instance;
+    GtkBox parent_instance;
 
     GtkWidget *statusbar_database_stack;
     GtkWidget *statusbar_database_status_box;
@@ -36,7 +36,7 @@ struct _FsearchStatusbar {
     guint statusbar_timeout_id;
 };
 
-G_DEFINE_TYPE(FsearchStatusbar, fsearch_statusbar, GTK_TYPE_REVEALER)
+G_DEFINE_TYPE(FsearchStatusbar, fsearch_statusbar, GTK_TYPE_BOX)
 
 static void
 statusbar_remove_status_update_timeout(FsearchStatusbar *sb) {
@@ -127,12 +127,12 @@ fsearch_statusbar_set_filter(FsearchStatusbar *sb, const char *filter_name) {
 void
 fsearch_statusbar_set_database_index_text(FsearchStatusbar *sb, const char *text) {
     if (!text) {
-        gtk_widget_hide(sb->statusbar_scan_label);
-        gtk_widget_hide(sb->statusbar_scan_status_label);
+        gtk_widget_set_visible(sb->statusbar_scan_label, FALSE);
+        gtk_widget_set_visible(sb->statusbar_scan_status_label, FALSE);
     }
     else {
-        gtk_widget_show(sb->statusbar_scan_label);
-        gtk_widget_show(sb->statusbar_scan_status_label);
+        gtk_widget_set_visible(sb->statusbar_scan_label, TRUE);
+        gtk_widget_set_visible(sb->statusbar_scan_status_label, TRUE);
         gtk_label_set_text(GTK_LABEL(sb->statusbar_scan_status_label), text);
     }
 }
@@ -180,8 +180,8 @@ fsearch_statusbar_set_database_idle(FsearchStatusbar *sb) {
     fsearch_statusbar_set_num_search_results(sb, 0);
 
     gtk_spinner_stop(GTK_SPINNER(sb->statusbar_database_updating_spinner));
-    gtk_widget_hide(sb->statusbar_scan_label);
-    gtk_widget_hide(sb->statusbar_scan_status_label);
+    gtk_widget_set_visible(sb->statusbar_scan_label, FALSE);
+    gtk_widget_set_visible(sb->statusbar_scan_status_label, FALSE);
 
     gtk_stack_set_visible_child(GTK_STACK(sb->statusbar_database_stack), sb->statusbar_database_status_box);
 
@@ -200,8 +200,8 @@ on_database_scan_started(gpointer data, gpointer user_data) {
     FsearchConfig *config = fsearch_application_get_config(app);
 
     if (config->show_indexing_status) {
-        gtk_widget_show(statusbar->statusbar_scan_label);
-        gtk_widget_show(statusbar->statusbar_scan_status_label);
+        gtk_widget_set_visible(statusbar->statusbar_scan_label, TRUE);
+        gtk_widget_set_visible(statusbar->statusbar_scan_status_label, TRUE);
     }
     fsearch_statusbar_set_database_scanning(statusbar);
 }
@@ -212,8 +212,8 @@ on_database_load_started(gpointer data, gpointer user_data) {
     FsearchApplication *app = FSEARCH_APPLICATION_DEFAULT;
     FsearchConfig *config = fsearch_application_get_config(app);
     if (config->show_indexing_status) {
-        gtk_widget_show(statusbar->statusbar_scan_label);
-        gtk_widget_show(statusbar->statusbar_scan_status_label);
+        gtk_widget_set_visible(statusbar->statusbar_scan_label, TRUE);
+        gtk_widget_set_visible(statusbar->statusbar_scan_status_label, TRUE);
     }
     fsearch_statusbar_set_database_loading(statusbar);
 }
@@ -339,6 +339,6 @@ fsearch_statusbar_class_init(FsearchStatusbarClass *klass) {
 }
 
 FsearchStatusbar *
-fsearch_statusbar_new() {
-    return g_object_new(FSEARCH_STATUSBAR_TYPE, NULL, NULL, NULL);
+fsearch_statusbar_new(void) {
+    return g_object_new(FSEARCH_STATUSBAR_TYPE, NULL);
 }

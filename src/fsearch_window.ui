@@ -629,6 +629,16 @@
                 </child>
               </object>
             </child>
+            <child>
+              <object class="GtkRevealer" id="statusbar_revealer">
+                <property name="can-focus">False</property>
+                <property name="transition-type">slide-up</property>
+                <property name="reveal-child">True</property>
+                <child>
+                  <object class="FsearchStatusbar" id="statusbar"/>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">True</property>
