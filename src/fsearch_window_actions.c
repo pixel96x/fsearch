@@ -427,7 +427,7 @@ action_after_open(bool action_mouse) {
             g_application_quit(G_APPLICATION(FSEARCH_APPLICATION_DEFAULT));
         }
         else if (config->action_after_file_open == ACTION_AFTER_OPEN_MINIMIZE) {
-            gtk_window_iconify(gtk_application_get_active_window(GTK_APPLICATION(FSEARCH_APPLICATION_DEFAULT)));
+            gtk_window_minimize(gtk_application_get_active_window(GTK_APPLICATION(FSEARCH_APPLICATION_DEFAULT)));
         }
     }
 }
@@ -469,7 +469,7 @@ fsearch_window_action_open_with(GSimpleAction *action, GVariant *variant, gpoint
     #else
     g_autoptr(GDesktopAppInfo) app_info = g_desktop_app_info_new(app_id);
     #endif
-    
+
     if (!app_info) {
         return;
     }
@@ -676,7 +676,7 @@ fsearch_window_action_focus_search(GSimpleAction *action, GVariant *variant, gpo
 static void
 fsearch_window_action_hide_window(GSimpleAction *action, GVariant *variant, gpointer user_data) {
     FsearchApplicationWindow *self = user_data;
-    gtk_window_iconify(GTK_WINDOW(self));
+    gtk_window_minimize(GTK_WINDOW(self));
 }
 
 static void
