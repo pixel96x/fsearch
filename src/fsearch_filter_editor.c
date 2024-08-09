@@ -132,5 +132,5 @@ fsearch_filter_editor_run(const char *title,
         gtk_toggle_button_set_active(editor->match_case, filter->flags & QUERY_FLAG_MATCH_CASE ? TRUE : FALSE);
         gtk_toggle_button_set_active(editor->enable_regex, filter->flags & QUERY_FLAG_REGEX ? TRUE : FALSE);
     }
-    gtk_widget_show(editor->dialog);
+    gtk_widget_set_visible(editor->dialog, FALSE);
 }

@@ -648,7 +648,7 @@ fsearch_window_action_open_with_other(GSimpleAction *action, GVariant *variant, 
                                                                              GTK_DIALOG_MODAL,
                                                                              content_type ? content_type
                                                                                           : "application/octet-stream");
-    gtk_widget_show(app_chooser_dlg);
+    gtk_widget_set_visible(app_chooser_dlg, TRUE);
 
     GtkWidget *widget = gtk_app_chooser_dialog_get_widget(GTK_APP_CHOOSER_DIALOG(app_chooser_dlg));
     g_object_set(widget, "show-fallback", TRUE, "show-other", TRUE, NULL);

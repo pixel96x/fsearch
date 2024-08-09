@@ -39,7 +39,7 @@ ui_utils_run_gtk_dialog_async(GtkWidget *parent,
     gtk_window_set_title(GTK_WINDOW(dialog), "");
 
     g_signal_connect(dialog, "response", G_CALLBACK(response_cb), response_cb_data);
-    gtk_widget_show(dialog);
+    gtk_widget_set_visible(dialog, TRUE);
 }
 
 gint

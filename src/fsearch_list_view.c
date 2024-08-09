@@ -2031,12 +2031,7 @@ fsearch_list_view_column_set_emblem(FsearchListViewColumn *col, const char *embl
         return;
     }
     gtk_image_set_from_icon_name(GTK_IMAGE(col->emblem), emblem_name);
-    if (visible) {
-        gtk_widget_show(col->emblem);
-    }
-    else {
-        gtk_widget_hide(col->emblem);
-    }
+    gtk_widget_set_visible(col->emblem, visible);
 }
 
 void
@@ -2051,11 +2046,11 @@ fsearch_list_view_column_set_visible(FsearchListView *view, FsearchListViewColum
         return;
     }
     if (col->visible) {
-        gtk_widget_hide(col->button);
+        gtk_widget_set_visible(col->button, FALSE);
         view->min_list_width -= col->width;
     }
     else {
-        gtk_widget_show(col->button);
+        gtk_widget_set_visible(col->button, FALSE);
         view->min_list_width += col->width;
     }
 
@@ -2071,7 +2066,7 @@ static void
 fsearch_list_view_reset_sort_indicator(FsearchListView *view) {
     for (GList *col = view->columns; col != NULL; col = col->next) {
         FsearchListViewColumn *column = col->data;
-        gtk_widget_hide(column->arrow);
+        gtk_widget_set_visible(column->arrow, FALSE);
         gtk_widget_set_sensitive(column->button, TRUE);
 
         if (gtk_widget_get_realized(GTK_WIDGET(view))) {
@@ -2091,7 +2086,7 @@ fsearch_list_view_update_sort_indicator(FsearchListView *view) {
 
     gtk_image_set_from_icon_name(GTK_IMAGE(col->arrow),
                                  view->sort_type == GTK_SORT_DESCENDING ? "pan-up-symbolic" : "pan-down-symbolic");
-    gtk_widget_show(col->arrow);
+    gtk_widget_set_visible(col->arrow, TRUE);
 }
 
 static void
@@ -2109,7 +2104,7 @@ on_fsearch_list_view_header_button_clicked(GtkButton *button, gpointer user_data
         }
     }
     gtk_image_set_from_icon_name(GTK_IMAGE(col->arrow), "content-loading-symbolic");
-    gtk_widget_show(col->arrow);
+    gtk_widget_set_visible(col->arrow, TRUE);
     gtk_widget_set_sensitive(col->button, FALSE);
 }
 
@@ -2329,7 +2324,7 @@ fsearch_list_view_column_new(int type,
     g_assert(col);
 
     col->button = gtk_button_new();
-    gtk_widget_show(col->button);
+    gtk_widget_set_visible(col->button, TRUE);
     GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
     col->emblem = gtk_image_new_from_icon_name("emblem-important");
     gtk_widget_set_opacity(col->emblem, 0.3);
@@ -2343,8 +2338,8 @@ fsearch_list_view_column_new(int type,
 
     gtk_box_set_child(GTK_BUTTON(col->button), hbox);
 
-    gtk_widget_show(hbox);
-    gtk_widget_show(label);
+    gtk_widget_set_visible(hbox, TRUE);
+    gtk_widget_set_visible(label, TRUE);
 
     col->type = type;
     col->name = g_strdup(name ? name : "");

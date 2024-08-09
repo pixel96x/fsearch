@@ -781,5 +781,5 @@ preferences_ui_launch(FsearchConfig *config,
 
     preferences_ui_init(ui, page);
 
-    gtk_widget_show(ui->dialog);
+    gtk_widget_set_visible(ui->dialog, TRUE);
 }

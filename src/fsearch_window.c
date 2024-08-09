@@ -776,7 +776,7 @@ fsearch_application_window_init_listview(FsearchApplicationWindow *win) {
     FsearchListView *list_view = fsearch_list_view_new(hadj, vadj);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(win->listview_scrolled_window), GTK_WIDGET(list_view));
 
-    gtk_widget_show((GTK_WIDGET(list_view)));
+    gtk_widget_set_visible((GTK_WIDGET(list_view)), TRUE);
     fsearch_list_view_set_query_tooltip_func(list_view, fsearch_list_view_query_tooltip, win);
     fsearch_list_view_set_draw_row_func(list_view, fsearch_list_view_draw_row, win);
     fsearch_list_view_set_sort_func(list_view, fsearch_results_sort_func, win);
@@ -971,14 +971,14 @@ fsearch_window_db_view_content_changed_cb(gpointer data) {
 
     if (is_empty_search(win)) {
         show_overlay(win, OVERLAY_QUERY_EMPTY);
-        gtk_widget_show(win->main_search_overlay_stack);
+        gtk_widget_set_visible(win->main_search_overlay_stack, TRUE);
     }
     else if (num_rows == 0) {
         show_overlay(win, OVERLAY_RESULTS_EMPTY);
-        gtk_widget_show(win->main_search_overlay_stack);
+        gtk_widget_set_visible(win->main_search_overlay_stack, TRUE);
     }
     else {
-        gtk_widget_hide(win->main_search_overlay_stack);
+        gtk_widget_set_visible(win->main_search_overlay_stack, FALSE);
     }
     return G_SOURCE_REMOVE;
 }
