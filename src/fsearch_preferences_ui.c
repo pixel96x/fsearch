@@ -321,7 +321,8 @@ on_exclude_add_button_clicked(GtkButton *button, gpointer user_data) {
 
 static void
 path_entry_changed(GtkEntry *entry, GtkWidget *add_button) {
-    const char *path = gtk_entry_get_text(entry);
+    GtkEditable *editable = GTK_EDITABLE(entry);
+    const char *path = gtk_editable_get_text(editable);
     if (path && g_file_test(path, G_FILE_TEST_IS_DIR)) {
         gtk_widget_set_sensitive(add_button, TRUE);
     }
@@ -344,7 +345,8 @@ on_exclude_path_entry_changed(GtkEntry *entry, gpointer user_data) {
 
 static void
 add_path(GtkEntry *entry, GtkTreeModel *model, FsearchPreferencesRowAddFunc row_add_func) {
-    const char *path = gtk_entry_get_text(entry);
+    GtkEditable *editable = GTK_EDITABLE(entry);
+    const char *path = gtk_editable_get_text(editable);
     if (path && g_file_test(path, G_FILE_TEST_IS_DIR)) {
         g_autoptr(GFile) file = g_file_new_for_path(path);
         g_autofree char *file_path = g_file_get_path(file);
