@@ -156,13 +156,8 @@ typedef struct {
     FsearchPreferencesRowAddFunc row_add_func;
 } FsearchPreferencesFileChooserContext;
 
-#if !GTK_CHECK_VERSION(3, 20, 0)
-static void
-on_file_chooser_dialog_response(GtkFileChooserDialog *dialog, GtkResponseType response, gpointer user_data) {
-#else
 static void
 on_file_chooser_native_dialog_response(GtkNativeDialog *dialog, GtkResponseType response, gpointer user_data) {
-#endif
     FsearchPreferencesFileChooserContext *ctx = user_data;
     g_assert(ctx);
     g_assert(ctx->row_add_func);

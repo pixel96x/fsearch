@@ -1349,19 +1349,11 @@ fsearch_list_view_get_property(GObject *object, guint prop_id, GValue *value, GP
 
 static void
 update_hovered_idx_for_current_cursor_position(FsearchListView *view) {
-#if GTK_CHECK_VERSION(3, 20, 0)
     GdkSeat *seat = gdk_display_get_default_seat(gdk_display_get_default());
     if (!seat) {
         return;
     }
     GdkDevice *pointer_device = gdk_seat_get_pointer(seat);
-#else
-    GdkDeviceManager *device_manager = gdk_display_get_device_manager(gdk_display_get_default());
-    if (!device_manager) {
-        return;
-    }
-    GdkDevice *pointer_device = gdk_device_manager_get_client_pointer(device_manager);
-#endif
     if (!pointer_device) {
         return;
     }
@@ -1911,9 +1903,7 @@ fsearch_list_view_class_init(FsearchListViewClass *klass) {
                                                                    G_TYPE_INT,
                                                                    G_TYPE_INT);
 
-#if GTK_CHECK_VERSION(3, 20, 0)
     gtk_widget_class_set_css_name(widget_class, "treeview");
-#endif
 }
 
 static void
@@ -2119,14 +2109,7 @@ on_fsearch_list_view_header_button_pressed(GtkWidget *widget, GdkEvent *event, g
 
         GtkWidget *menu_widget = gtk_menu_new_from_model(G_MENU_MODEL(menu_model));
         gtk_menu_attach_to_widget(GTK_MENU(menu_widget), list, NULL);
-#if !GTK_CHECK_VERSION(3, 22, 0)
-        guint button;
-        guint32 time = gdk_event_get_time(event);
-        gdk_event_get_button(event, &button);
-        gtk_menu_popup(GTK_MENU(menu_widget), NULL, NULL, NULL, NULL, button, time);
-#else
         gtk_menu_popup_at_pointer(GTK_MENU(menu_widget), NULL);
-#endif
         return GDK_EVENT_STOP;
     }
     return GDK_EVENT_PROPAGATE;
